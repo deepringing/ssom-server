@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_todo")
+@Entity
 public class Todo extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class Todo extends BaseTimeEntity {
     private Status status;
 
     @Builder
-    public Todo(User user, Goal goal, LocalDate timeCreate, LocalDateTime CompleteTime, Status status) {
+    public Todo(User user, Goal goal, LocalDateTime CompleteTime, Status status) {
         this.user = user;
         this.goal = goal;
         this.CompleteTime = CompleteTime;

@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_team")
+@Entity
 public class Team extends BaseTimeEntity {
 
     @Id
@@ -32,7 +32,7 @@ public class Team extends BaseTimeEntity {
 
 
     @Builder
-    public Team(String teamName, LocalDate timeCreate, Status status, User user, Team team) {
+    public Team(String teamName, Status status) {
         this.teamName = teamName;
         this.status = status;
     }

@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "tbl_user")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "tbl_user")
+@Entity
 public class User extends BaseTimeEntity {
 
     @Id
