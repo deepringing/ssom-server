@@ -1,7 +1,6 @@
 package com.ullim.ssomserver.domain.user.domain;
 
 import com.ullim.ssomserver.domain.user.domain.type.Gender;
-import com.ullim.ssomserver.domain.user.domain.type.UserStatus;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

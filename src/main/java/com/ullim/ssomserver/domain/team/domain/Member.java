@@ -1,19 +1,19 @@
 package com.ullim.ssomserver.domain.team.domain;
 
-import com.ullim.ssomserver.domain.goal.domain.Goal;
-import com.ullim.ssomserver.domain.team.domain.type.TeamStatus;
 import com.ullim.ssomserver.domain.user.domain.User;
+import com.ullim.ssomserver.global.type.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "tbl_member")\@Entity
+@Table(name = "tbl_member")
 @Entity
 public class Member {
 
@@ -23,11 +23,11 @@ public class Member {
     private Long id;
 
     @Column(name = "time_join", nullable = false)
-    private LocalDate timeJoin;
+    private LocalDateTime timeJoin;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
-    private TeamStatus status;
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -38,7 +38,7 @@ public class Member {
     private Team team;
 
     @Builder
-    public Member(LocalDate timeJoin, TeamStatus status, User user, Team team) {
+    public Member(LocalDateTime timeJoin, Status status, User user, Team team) {
         this.timeJoin = timeJoin;
         this.status = status;
         this.user = user;
