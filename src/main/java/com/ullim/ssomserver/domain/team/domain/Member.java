@@ -1,6 +1,7 @@
 package com.ullim.ssomserver.domain.team.domain;
 
 import com.ullim.ssomserver.domain.user.domain.User;
+import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_member")
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

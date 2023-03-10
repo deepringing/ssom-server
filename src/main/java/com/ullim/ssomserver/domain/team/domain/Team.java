@@ -1,7 +1,8 @@
 package com.ullim.ssomserver.domain.team.domain;
 
-import com.ullim.ssomserver.domain.team.domain.type.TeamStatus;
 import com.ullim.ssomserver.domain.user.domain.User;
+import com.ullim.ssomserver.global.entity.BaseTimeEntity;
+import com.ullim.ssomserver.global.type.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_team")
-public class Team {
+public class Team extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +25,15 @@ public class Team {
     @Column(name = "team_name", nullable = false)
     private String teamName;
 
-    @Column(name = "time_create", nullable = false)
-    private LocalDate timeCreate;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
-    private TeamStatus status;
+    private Status status;
 
 
     @Builder
-    public Team(String teamName, LocalDate timeCreate, TeamStatus status, User user, Team team) {
+    public Team(String teamName, LocalDate timeCreate, Status status, User user, Team team) {
         this.teamName = teamName;
-        this.timeCreate = timeCreate;
         this.status = status;
     }
 

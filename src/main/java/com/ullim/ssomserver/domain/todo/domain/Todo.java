@@ -1,10 +1,9 @@
 package com.ullim.ssomserver.domain.todo.domain;
 
 import com.ullim.ssomserver.domain.goal.domain.Goal;
-import com.ullim.ssomserver.domain.todo.domain.type.CompleteStatus;
-import com.ullim.ssomserver.domain.todo.domain.type.TodoStatus;
 import com.ullim.ssomserver.domain.user.domain.User;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
+import com.ullim.ssomserver.global.type.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -31,27 +31,19 @@ public class Todo extends BaseTimeEntity {
     @JoinColumn(name = "goal_id", nullable = false)
     private Goal goal;
 
-    @Column(name = "time_create", nullable = false)
-    private LocalDate timeCreate;
 
-    @Column(name = "time_complete", nullable = false)
-    private LocalDate timeComplete;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "complete_status", length = 14, nullable = false)
-    private CompleteStatus completeStatus;
+    @Column(name = "complete_time", nullable = false)
+    private LocalDateTime CompleteTime;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
-    private TodoStatus status;
+    private Status status;
 
     @Builder
-    public Todo(User user, Goal goal, LocalDate timeCreate, LocalDate timeComplete, CompleteStatus completeStatus, TodoStatus status) {
+    public Todo(User user, Goal goal, LocalDate timeCreate, LocalDateTime CompleteTime, Status status) {
         this.user = user;
         this.goal = goal;
-        this.timeCreate = timeCreate;
-        this.timeComplete = timeComplete;
-        this.completeStatus = completeStatus;
+        this.CompleteTime = CompleteTime;
         this.status = status;
     }
 }

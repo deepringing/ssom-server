@@ -2,6 +2,7 @@ package com.ullim.ssomserver.domain.user.domain;
 
 import com.ullim.ssomserver.domain.user.domain.type.Gender;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
+import com.ullim.ssomserver.global.type.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -39,10 +40,10 @@ public class User extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
-    private UserStatus status;
+    private Status status;
 
     @Builder
-    public User(String name, String email, String nickname, LocalDate birth, Gender gender, UserStatus status) {
+    public User(String name, String email, String nickname, LocalDate birth, Gender gender, Status status) {
         this.name = name;
         this.email = email;
         this.nickname = nickname;

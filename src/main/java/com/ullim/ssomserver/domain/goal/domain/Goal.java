@@ -1,9 +1,9 @@
 package com.ullim.ssomserver.domain.goal.domain;
 
-import com.ullim.ssomserver.domain.goal.domain.type.GoalStatus;
 import com.ullim.ssomserver.domain.team.domain.Team;
-import com.ullim.ssomserver.domain.todo.domain.type.CompleteStatus;
 import com.ullim.ssomserver.domain.user.domain.User;
+import com.ullim.ssomserver.global.entity.BaseTimeEntity;
+import com.ullim.ssomserver.global.type.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_goal")
-public class Goal {
+public class Goal extends BaseTimeEntity {
 
 
     @Id
@@ -32,27 +32,19 @@ public class Goal {
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
-    @Column(name = "time_create", nullable = false)
-    private LocalDate timeCreate;
 
-    @Column(name = "time_complete", nullable = false)
-    private LocalDate timeComplete;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "complete_status", length = 14, nullable = false)
-    private CompleteStatus completeStatus;
+    @Column(name = "complete_time", nullable = false)
+    private LocalDate CompleteTime;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
-    private GoalStatus status;
+    private Status status;
 
     @Builder
-    public Goal(User user, Team team, LocalDate timeCreate, LocalDate timeComplete, CompleteStatus completeStatus, GoalStatus status) {
+    public Goal(User user, Team team, LocalDate timeCreate, LocalDate completeTime, Status status) {
         this.user = user;
         this.team = team;
-        this.timeCreate = timeCreate;
-        this.timeComplete = timeComplete;
-        this.completeStatus = completeStatus;
+        this.CompleteTime = completeTime;
         this.status = status;
     }
 }
