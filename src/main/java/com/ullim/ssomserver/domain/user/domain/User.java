@@ -3,12 +3,12 @@ package com.ullim.ssomserver.domain.user.domain;
 import com.ullim.ssomserver.domain.user.domain.type.Gender;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
-import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter

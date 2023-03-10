@@ -3,7 +3,7 @@ package com.ullim.ssomserver.domain.team.domain;
 import com.ullim.ssomserver.domain.user.domain.User;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
