@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -33,18 +34,18 @@ public class Goal extends BaseTimeEntity {
     private Team team;
 
 
-    @Column(name = "complete_time", nullable = false)
-    private LocalDate CompleteTime;
+    @Column(name = "completed_at", nullable = false)
+    private LocalDateTime completedAt;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
     private Status status;
 
     @Builder
-    public Goal(User user, Team team, LocalDate completeTime, Status status) {
+    public Goal(User user, Team team, LocalDateTime completedAt, Status status) {
         this.user = user;
         this.team = team;
-        this.CompleteTime = completeTime;
+        this.completedAt = completedAt;
         this.status = status;
     }
 }

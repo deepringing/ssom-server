@@ -21,8 +21,8 @@ public class Team extends BaseTimeEntity {
     @Column(name = "team_id")
     private Long id;
 
-    @Column(name = "team_name", nullable = false)
-    private String teamName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
 
     @Enumerated(EnumType.STRING)
@@ -31,8 +31,8 @@ public class Team extends BaseTimeEntity {
 
 
     @Builder
-    public Team(String teamName, Status status) {
-        this.teamName = teamName;
+    public Team(String name, Status status) {
+        this.name = name;
         this.status = status;
     }
 

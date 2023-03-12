@@ -24,8 +24,8 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "time_join", nullable = false)
-    private LocalDateTime timeJoin;
+    @Column(name = "joined_at", nullable = false)
+    private LocalDateTime joinedAt;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
@@ -40,8 +40,8 @@ public class Member extends BaseTimeEntity {
     private Team team;
 
     @Builder
-    public Member(LocalDateTime timeJoin, Status status, User user, Team team) {
-        this.timeJoin = timeJoin;
+    public Member(LocalDateTime joinedAt, Status status, User user, Team team) {
+        this.joinedAt = joinedAt;
         this.status = status;
         this.user = user;
         this.team = team;

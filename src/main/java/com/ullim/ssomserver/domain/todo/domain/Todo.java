@@ -31,18 +31,18 @@ public class Todo extends BaseTimeEntity {
     private Goal goal;
 
 
-    @Column(name = "complete_time", nullable = false)
-    private LocalDateTime CompleteTime;
+    @Column(name = "completed_at", nullable = false)
+    private LocalDateTime completedAt;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
     private Status status;
 
     @Builder
-    public Todo(User user, Goal goal, LocalDateTime CompleteTime, Status status) {
+    public Todo(User user, Goal goal, LocalDateTime completedAt, Status status) {
         this.user = user;
         this.goal = goal;
-        this.CompleteTime = CompleteTime;
+        this.completedAt = completedAt;
         this.status = status;
     }
 }
