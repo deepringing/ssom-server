@@ -24,7 +24,6 @@ public class GoogleAuthService {
     private final GoogleInformationClient googleInformationClient;
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserFacade userFacade;
 
     @Transactional
     public TokenResponse execute(String code) {
