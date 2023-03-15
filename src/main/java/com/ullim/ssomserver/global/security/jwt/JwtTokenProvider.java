@@ -30,6 +30,10 @@ public class JwtTokenProvider {
     }
 
     public String createAccessToken(String email) {
+        return createToken(email, jwtProperties.getAccessTime());
+    }
+
+    public String createRefreshToken(String email) {
         String token = createToken(email, jwtProperties.getRefreshTime());
 
         refreshTokenRepository.save(
