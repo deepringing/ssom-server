@@ -1,7 +1,6 @@
 package com.ullim.ssomserver.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ullim.ssomserver.domain.user.domain.type.Authority;
 import com.ullim.ssomserver.global.error.filter.GlobalErrorFilter;
 import com.ullim.ssomserver.global.security.auth.AuthDetailsService;
 import com.ullim.ssomserver.global.security.jwt.JwtTokenProvider;
@@ -10,7 +9,6 @@ import com.ullim.ssomserver.global.security.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
