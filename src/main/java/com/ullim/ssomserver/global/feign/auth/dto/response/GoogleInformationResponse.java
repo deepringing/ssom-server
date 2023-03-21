@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 public class GoogleInformationResponse {
 
     private String email;
+
+    private String name;
 }
 

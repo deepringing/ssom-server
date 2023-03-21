@@ -10,11 +10,13 @@ import com.ullim.ssomserver.global.feign.auth.GoogleInformationClient;
 import com.ullim.ssomserver.global.feign.auth.dto.request.GoogleAuthRequest;
 import com.ullim.ssomserver.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GoogleAuthService {
@@ -31,30 +33,26 @@ public class GoogleAuthService {
         String accessToken = googleAuthClient.getAccessToken(
                 createGoogleAuthRequest(code)).getAccessToken();
         String email = googleInformationClient.getUserInformation(accessToken).getEmail();
+        String name = googleInformationClient.getUserInformation(accessToken).getName();
+        log.info(email);
 
         Optional<User> nowUser = userRepository.findByEmail(email);
-        User user = null;
         if (nowUser.isEmpty()) {
-            isLogin = false;
-
-            user = userRepository.save(
+            // TODO :: 회원가입
+            User user = userRepository.save(
                     User.builder()
                             .email(email)
+
                             .build()
             );
-        } else if (nowUser.get().getName() == null || nowUser.get().getName().equals("")) {
-            isLogin = false;
-            user = nowUser.get();
         } else {
-            user = nowUser.get();
+            // TODO :: 로그인
+            User user = nowUser.get();
         }
 
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.createAccessToken(email))
                 .refreshToken(jwtTokenProvider.createRefreshToken(email))
-                .email(email)
-                .name(user.getName())
-                .isLogin(isLogin)
                 .build();
     }
 
