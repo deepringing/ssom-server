@@ -42,10 +42,10 @@ public class Goal extends BaseTimeEntity {
     private Status status;
 
     @Builder
-    public Goal(User user, Team team, LocalDateTime completedAt, Status status) {
+    public Goal(User user, Team team, LocalDateTime completedAt) {
         this.user = user;
         this.team = team;
         this.completedAt = completedAt;
-        this.status = status;
+        this.status = Status.STARTED;
     }
 }

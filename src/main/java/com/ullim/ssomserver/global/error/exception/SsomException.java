@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class SimblueException extends RuntimeException{
+public class SsomException extends RuntimeException{
     private final ErrorProperty errorProperty;
 }
