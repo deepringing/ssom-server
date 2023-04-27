@@ -14,20 +14,14 @@ public class UserResponseDto {
 
     private Long id;
     private String email;
-    private String name;
     private String nickname;
-    private LocalDate birth;
-    private Gender gender;
     private Status status;
 
     public static UserResponseDto of(User user) {
         return UserResponseDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
-                .name(user.getName())
                 .nickname(user.getNickname())
-                .birth(user.getBirth())
-                .gender(user.getGender())
                 .status(user.getStatus())
                 .build();
     }

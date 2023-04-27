@@ -8,6 +8,7 @@ import com.ullim.ssomserver.global.config.properties.AuthProperties;
 import com.ullim.ssomserver.global.feign.auth.GoogleAuthClient;
 import com.ullim.ssomserver.global.feign.auth.GoogleInformationClient;
 import com.ullim.ssomserver.global.feign.auth.dto.request.GoogleAuthRequest;
+import com.ullim.ssomserver.global.feign.auth.dto.response.GoogleInformationResponse;
 import com.ullim.ssomserver.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,30 +30,24 @@ public class GoogleAuthService {
 
     @Transactional
     public TokenResponse execute(String code) {
-        boolean isLogin = true;
         String accessToken = googleAuthClient.getAccessToken(
                 createGoogleAuthRequest(code)).getAccessToken();
-        String email = googleInformationClient.getUserInformation(accessToken).getEmail();
-        String name = googleInformationClient.getUserInformation(accessToken).getName();
-        log.info(email);
+        GoogleInformationResponse information = googleInformationClient.getUserInformation(accessToken);
 
-        Optional<User> nowUser = userRepository.findByEmail(email);
-        if (nowUser.isEmpty()) {
-            // TODO :: 회원가입
-            User user = userRepository.save(
+        Optional<User> user = userRepository.findByEmail(information.getEmail());
+
+        if (user.isEmpty()) {
+            user = Optional.of(userRepository.save(
                     User.builder()
-                            .email(email)
-
+                            .nickname(information.getName())
+                            .email(information.getEmail())
                             .build()
-            );
-        } else {
-            // TODO :: 로그인
-            User user = nowUser.get();
+            ));
         }
 
         return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.createAccessToken(email))
-                .refreshToken(jwtTokenProvider.createRefreshToken(email))
+                .accessToken(jwtTokenProvider.createAccessToken(information.getEmail()))
+                .refreshToken(jwtTokenProvider.createRefreshToken(information.getEmail()))
                 .build();
     }
 
