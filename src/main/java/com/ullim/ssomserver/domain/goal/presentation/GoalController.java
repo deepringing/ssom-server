@@ -3,6 +3,7 @@ package com.ullim.ssomserver.domain.goal.presentation;
 import com.ullim.ssomserver.domain.goal.presentation.dto.request.CreateGoalRequestDto;
 import com.ullim.ssomserver.domain.goal.presentation.dto.response.GoalListResponseDto;
 import com.ullim.ssomserver.domain.goal.service.CreateGoalService;
+import com.ullim.ssomserver.domain.goal.service.GetGoalListByTeamIdService;
 import com.ullim.ssomserver.domain.goal.service.GetGoalListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class GoalController {
 
     private final CreateGoalService createGoalService;
     private final GetGoalListService getGoalListService;
+    private final GetGoalListByTeamIdService getGoalListByTeamIdService;
 
     @PostMapping
     public void saveGoal(@RequestBody @Valid CreateGoalRequestDto request){
@@ -25,6 +27,11 @@ public class GoalController {
     @GetMapping("/my")
     public GoalListResponseDto getUserGoal() {
         return getGoalListService.execute();
+    }
+
+    @GetMapping("/team/{id}")
+    public GoalListResponseDto getUserGoalByTeam(@PathVariable Long id) {
+        return getGoalListByTeamIdService.execute(id);
     }
 
 
