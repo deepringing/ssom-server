@@ -9,7 +9,4 @@ public class TokenResponse {
 
     private String accessToken;
     private String refreshToken;
-    private String name;
-    private String email;
-    private boolean isLogin;
 }

@@ -8,13 +8,16 @@ import com.ullim.ssomserver.global.config.properties.AuthProperties;
 import com.ullim.ssomserver.global.feign.auth.GoogleAuthClient;
 import com.ullim.ssomserver.global.feign.auth.GoogleInformationClient;
 import com.ullim.ssomserver.global.feign.auth.dto.request.GoogleAuthRequest;
+import com.ullim.ssomserver.global.feign.auth.dto.response.GoogleInformationResponse;
 import com.ullim.ssomserver.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GoogleAuthService {
@@ -27,34 +30,24 @@ public class GoogleAuthService {
 
     @Transactional
     public TokenResponse execute(String code) {
-        boolean isLogin = true;
         String accessToken = googleAuthClient.getAccessToken(
                 createGoogleAuthRequest(code)).getAccessToken();
-        String email = googleInformationClient.getUserInformation(accessToken).getEmail();
+        GoogleInformationResponse information = googleInformationClient.getUserInformation(accessToken);
 
-        Optional<User> nowUser = userRepository.findByEmail(email);
-        User user = null;
-        if (nowUser.isEmpty()) {
-            isLogin = false;
+        Optional<User> user = userRepository.findByEmail(information.getEmail());
 
-            user = userRepository.save(
+        if (user.isEmpty()) {
+            user = Optional.of(userRepository.save(
                     User.builder()
-                            .email(email)
+                            .nickname(information.getName())
+                            .email(information.getEmail())
                             .build()
-            );
-        } else if (nowUser.get().getName() == null || nowUser.get().getName().equals("")) {
-            isLogin = false;
-            user = nowUser.get();
-        } else {
-            user = nowUser.get();
+            ));
         }
 
         return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.createAccessToken(email))
-                .refreshToken(jwtTokenProvider.createRefreshToken(email))
-                .email(email)
-                .name(user.getName())
-                .isLogin(isLogin)
+                .accessToken(jwtTokenProvider.createAccessToken(information.getEmail()))
+                .refreshToken(jwtTokenProvider.createRefreshToken(information.getEmail()))
                 .build();
     }
 

@@ -1,6 +1,5 @@
 package com.ullim.ssomserver.domain.user.domain;
 
-import com.ullim.ssomserver.domain.user.domain.type.Gender;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
 import lombok.AccessLevel;
@@ -8,8 +7,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,34 +27,20 @@ public class User extends BaseTimeEntity {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(length = 20, nullable = false)
-    private String name;
-
     @Column(length = 30, nullable = false)
     private String email;
 
     @Column(length = 30, nullable = false)
     private String nickname;
 
-    @Column(length = 20, nullable = false)
-    private LocalDate birth;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 7, nullable = false)
-    private Gender gender;
-
     @Enumerated(EnumType.STRING)
     @Column(length = 14, nullable = false)
     private Status status;
 
     @Builder
-    public User(String name, String email, String nickname, LocalDate birth, Gender gender, Status status) {
-        this.name = name;
+    public User(String email, String nickname, Status status) {
         this.email = email;
         this.nickname = nickname;
-        this.birth = birth;
-        this.gender = gender;
         this.status = status;
     }
-
 }

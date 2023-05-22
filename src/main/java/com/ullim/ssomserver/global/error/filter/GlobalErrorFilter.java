@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ullim.ssomserver.global.error.ErrorResponse;
 import com.ullim.ssomserver.global.error.exception.ErrorCode;
 import com.ullim.ssomserver.global.error.exception.ErrorProperty;
-import com.ullim.ssomserver.global.error.exception.SimblueException;
+import com.ullim.ssomserver.global.error.exception.SsomException;
 import com.ullim.ssomserver.global.security.jwt.exception.ExpiredTokenException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -31,11 +31,11 @@ public class GlobalErrorFilter extends OncePerRequestFilter {
         } catch (ExpiredTokenException e) {
             setErrorResponse(e.getErrorProperty(), response);
             response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        } catch (SimblueException e) {
+        } catch (SsomException e) {
             setErrorResponse(e.getErrorProperty(), response);
         } catch (Exception e) {
-            if (e.getCause() instanceof SimblueException) {
-                setErrorResponse(((SimblueException) e.getCause()).getErrorProperty(), response);
+            if (e.getCause() instanceof SsomException) {
+                setErrorResponse(((SsomException) e.getCause()).getErrorProperty(), response);
             } else {
                 e.printStackTrace();
                 setErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR, response);
