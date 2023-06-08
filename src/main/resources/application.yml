@@ -7,6 +7,9 @@ spring:
     port: 6379
     password: ssom
 
+  cache:
+    type: redis
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -41,4 +44,4 @@ jwt:
   header: Authorization
   secret-key: ${JWT_SECRET}
 
-#debug: true
+debug: true
