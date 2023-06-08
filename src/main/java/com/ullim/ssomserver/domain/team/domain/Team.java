@@ -26,7 +26,7 @@ public class Team extends BaseTimeEntity {
 
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 14, nullable = false)
+    @Column(length = 14)
     private Status status;
 
 

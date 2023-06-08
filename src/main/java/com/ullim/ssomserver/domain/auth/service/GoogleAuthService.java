@@ -10,6 +10,7 @@ import com.ullim.ssomserver.global.feign.auth.GoogleInformationClient;
 import com.ullim.ssomserver.global.feign.auth.dto.request.GoogleAuthRequest;
 import com.ullim.ssomserver.global.feign.auth.dto.response.GoogleInformationResponse;
 import com.ullim.ssomserver.global.security.jwt.JwtTokenProvider;
+import com.ullim.ssomserver.global.type.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class GoogleAuthService {
                     User.builder()
                             .nickname(information.getName())
                             .email(information.getEmail())
+                            .status(Status.STARTED)
                             .build()
             ));
         }

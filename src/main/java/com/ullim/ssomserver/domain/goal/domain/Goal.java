@@ -39,7 +39,7 @@ public class Goal extends BaseTimeEntity {
     private LocalDateTime completedAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 14, nullable = false)
+    @Column(length = 14)
     private Status status;
 
     @Builder

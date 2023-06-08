@@ -34,7 +34,7 @@ public class User extends BaseTimeEntity {
     private String nickname;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 14, nullable = false)
+    @Column(length = 14)
     private Status status;
 
     @Builder

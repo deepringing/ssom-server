@@ -28,7 +28,7 @@ public class Member extends BaseTimeEntity {
     private LocalDateTime joinedAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 14, nullable = false)
+    @Column(length = 14)
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
