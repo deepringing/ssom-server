@@ -1,7 +1,6 @@
 package com.ullim.ssomserver.domain.goal.domain.repository;
 
 import com.ullim.ssomserver.domain.goal.domain.Goal;
-import com.ullim.ssomserver.domain.goal.presentation.dto.response.GoalResponseDto;
 import com.ullim.ssomserver.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

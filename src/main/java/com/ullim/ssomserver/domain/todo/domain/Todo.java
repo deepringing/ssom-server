@@ -26,23 +26,30 @@ public class Todo extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(nullable = true)
+    private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "goal_id", nullable = false)
     private Goal goal;
-
-
-    @Column(name = "completed_at", nullable = false)
-    private LocalDateTime completedAt;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14)
     private Status status;
 
     @Builder
-    public Todo(User user, Goal goal, LocalDateTime completedAt, Status status) {
-        this.user = user;
+    public Todo(Goal goal, String content, User user, Status status) {
         this.goal = goal;
-        this.completedAt = completedAt;
+        this.content = content;
+        this.user = user;
         this.status = status;
+    }
+
+    public void completed() {
+        this.status = Status.COMPLETED;
+    }
+
+    public void deleted() {
+        this.status = Status.DELETED;
     }
 }
