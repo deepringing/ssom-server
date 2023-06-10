@@ -1,6 +1,7 @@
 package com.ullim.ssomserver.domain.goal.domain;
 
 import com.ullim.ssomserver.domain.team.domain.Team;
+import com.ullim.ssomserver.domain.todo.domain.Todo;
 import com.ullim.ssomserver.domain.user.domain.User;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
@@ -19,8 +20,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -50,6 +54,9 @@ public class Goal extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(length = 14)
     private Status status;
+
+    @OneToMany(mappedBy = "goal")
+    private List<Todo> todoList = new ArrayList<>();
 
     @Builder
     public Goal(String content, LocalDate completedAt, User user, Team team) {
