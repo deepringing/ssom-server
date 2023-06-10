@@ -55,8 +55,12 @@ public class Todo extends BaseTimeEntity {
         this.status = status;
     }
 
-    public void completed() {
-        this.status = Status.COMPLETED;
+    public void toggle() {
+        if (status == Status.STARTED) {
+            this.status = Status.COMPLETED;
+        } else if (status == Status.COMPLETED) {
+            this.status = Status.STARTED;
+        }
     }
 
     public void deleted() {

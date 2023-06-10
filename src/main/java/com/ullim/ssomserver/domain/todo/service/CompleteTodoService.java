@@ -16,9 +16,9 @@ public class CompleteTodoService {
     private final TodoFacade todoFacade;
 
     @Transactional
-    public void execute(Long todo_id) {
-        Todo todo = todoFacade.findTodoById(todo_id);
-        todo.completed();
+    public void execute(Long todoId) {
+        Todo todo = todoFacade.findTodoById(todoId);
+        todo.toggle();
     }
 
 

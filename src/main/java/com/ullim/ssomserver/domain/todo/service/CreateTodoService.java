@@ -1,6 +1,6 @@
 package com.ullim.ssomserver.domain.todo.service;
 
-import com.ullim.ssomserver.domain.team.domain.repository.TeamRepository;
+import com.ullim.ssomserver.domain.goal.facade.GoalFacade;
 import com.ullim.ssomserver.domain.todo.domain.Todo;
 import com.ullim.ssomserver.domain.todo.domain.repository.TodoRepository;
 import com.ullim.ssomserver.domain.todo.presentation.dto.request.CreateTodoRequestDto;
@@ -18,7 +18,7 @@ public class CreateTodoService {
 
     private final TodoRepository todoRepository;
     private final UserFacade userFacade;
-    private final TeamRepository teamRepository;
+    private final GoalFacade goalFacade;
 
     @Transactional
     public void execute(CreateTodoRequestDto request) {
@@ -26,12 +26,12 @@ public class CreateTodoService {
         Todo todo = Todo.builder()
                 .user(user)
                 .content(request.getContent())
-                .goal(request.getGoal())
+                .goal(goalFacade.findGoalById(request.getGoalId()))
                 .status(Status.STARTED)
                 .build();
+
         todoRepository.save(todo);
     }
-
 
 
 }

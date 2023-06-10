@@ -19,7 +19,7 @@ public class TodoController {
     private final CreateTodoService createTodoService;
     private final GetTodoListService getTodoListService;
     private final GetTodoListByTeamIdService getTodoListByTeamIdService;
-    private final CompleteTodoService completeTodoService;
+    private final CompleteTodoService toggleTodoService;
 
     @PostMapping
     public void saveTodo(@RequestBody @Valid CreateTodoRequestDto request){
@@ -36,9 +36,9 @@ public class TodoController {
         return getTodoListByTeamIdService.execute(id);
     }
 
-    @GetMapping("/complete/{id}")
+    @PatchMapping("/{id}/toggle")
     public void completeTodo(@PathVariable Long id) {
-        completeTodoService.execute(id);
+        toggleTodoService.execute(id);
     }
 
 
