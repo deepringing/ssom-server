@@ -31,8 +31,8 @@ public class TodoController {
         return getTodoListService.execute();
     }
 
-    @GetMapping("/team/{id}")
-    public TodoListResponseDto getUserTodoByTeam(@PathVariable Long id) {
+    @GetMapping("/goal/{id}")
+    public TodoListResponseDto getUserTodoByGoal(@PathVariable Long id) {
         return getTodoListByTeamIdService.execute(id);
     }
 

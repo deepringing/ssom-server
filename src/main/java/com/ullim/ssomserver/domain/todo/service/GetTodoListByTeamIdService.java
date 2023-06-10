@@ -1,6 +1,5 @@
 package com.ullim.ssomserver.domain.todo.service;
 
-import com.ullim.ssomserver.domain.todo.domain.Todo;
 import com.ullim.ssomserver.domain.todo.domain.repository.TodoRepository;
 import com.ullim.ssomserver.domain.todo.presentation.dto.response.TodoListResponseDto;
 import com.ullim.ssomserver.domain.todo.presentation.dto.response.TodoResponseDto;
@@ -17,15 +16,12 @@ public class GetTodoListByTeamIdService {
     private final TodoRepository todoRepository;
 
     @Transactional
-    public TodoListResponseDto execute(Long team_id) {
+    public TodoListResponseDto execute(Long goalId) {
         return new TodoListResponseDto(
-                todoRepository.findTodoByTeamId(team_id).stream()
-                        .map(this::createTodoResponse)
+                todoRepository.findTodoByGoalId(goalId)
+                        .stream()
+                        .map(TodoResponseDto::of)
                         .collect(Collectors.toList())
         );
     }
-    private TodoResponseDto createTodoResponse(Todo todo){
-        return TodoResponseDto.of(todo);
-    }
-
 }
