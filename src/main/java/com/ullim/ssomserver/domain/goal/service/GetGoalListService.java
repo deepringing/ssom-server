@@ -1,6 +1,5 @@
 package com.ullim.ssomserver.domain.goal.service;
 
-import com.ullim.ssomserver.domain.goal.domain.Goal;
 import com.ullim.ssomserver.domain.goal.domain.repository.GoalRepository;
 import com.ullim.ssomserver.domain.goal.presentation.dto.response.GoalListResponseDto;
 import com.ullim.ssomserver.domain.goal.presentation.dto.response.GoalResponseDto;
@@ -25,13 +24,8 @@ public class GetGoalListService {
 
         return new GoalListResponseDto(
                 goalRepository.findGoalByUser(user).stream()
-                        .map(this::createGoalResponse)
+                        .map(GoalResponseDto::of)
                         .collect(Collectors.toList())
         );
     }
-
-    private GoalResponseDto createGoalResponse(Goal goal){
-        return GoalResponseDto.of(goal);
-    }
-
 }
