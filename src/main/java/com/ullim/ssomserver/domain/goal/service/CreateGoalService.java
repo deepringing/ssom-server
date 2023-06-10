@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -28,6 +29,7 @@ public class CreateGoalService {
         Team team = teamRepository.findTeamById(request.getTeamId());
         Goal goal = Goal.builder()
                 .content(request.getContent())
+                .completedAt(LocalDateTime.now())
                 .team(team)
                 .user(user)
                 .build();
