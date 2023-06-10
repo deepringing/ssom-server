@@ -30,9 +30,7 @@ public class CreateGoalService {
                 .team(team)
                 .user(user)
                 .build();
+
         goalRepository.save(goal);
     }
-
-
-
 }

@@ -23,6 +23,7 @@ public class GetGoalListService {
         User user = userFacade.getCurrentUser();
 
         return new GoalListResponseDto(
+                null,
                 goalRepository.findGoalByUser(user).stream()
                         .map(GoalResponseDto::of)
                         .collect(Collectors.toList())

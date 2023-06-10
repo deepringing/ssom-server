@@ -5,21 +5,29 @@ import com.ullim.ssomserver.global.type.Status;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder
-public class TeamResponseDto {
+public class TeamDetailResponseDto {
 
     private Long id;
     private String name;
     private Status status;
+    private List<MemberResponse> memberList;
 
-    public static TeamResponseDto of(Team team) {
-        return TeamResponseDto.builder()
+    public static TeamDetailResponseDto of(Team team) {
+        return TeamDetailResponseDto.builder()
                 .id(team.getId())
                 .name(team.getName())
                 .status(team.getStatus())
+                .memberList(team.getMemberList()
+                        .stream()
+                        .map(MemberResponse::of)
+                        .collect(Collectors.toList())
+                )
                 .build();
     }
+
 }
