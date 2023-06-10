@@ -4,14 +4,23 @@ import com.ullim.ssomserver.domain.team.domain.Team;
 import com.ullim.ssomserver.domain.user.domain.User;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
-import javax.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,14 +45,14 @@ public class Goal extends BaseTimeEntity {
     private Team team;
 
     @Column(name = "completed_at", nullable = true)
-    private LocalDateTime completedAt;
+    private LocalDate completedAt;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 14)
     private Status status;
 
     @Builder
-    public Goal(String content, LocalDateTime completedAt, User user, Team team) {
+    public Goal(String content, LocalDate completedAt, User user, Team team) {
         this.content = content;
         this.completedAt = completedAt;
         this.user = user;

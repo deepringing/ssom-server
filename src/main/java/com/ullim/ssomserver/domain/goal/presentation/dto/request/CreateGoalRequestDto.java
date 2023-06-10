@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
@@ -16,4 +17,6 @@ public class CreateGoalRequestDto {
 
     private Long teamId;
 
+    @NotNull
+    private LocalDate completedAt;
 }

@@ -5,15 +5,12 @@ import com.ullim.ssomserver.domain.goal.domain.repository.GoalRepository;
 import com.ullim.ssomserver.domain.goal.presentation.dto.request.CreateGoalRequestDto;
 import com.ullim.ssomserver.domain.team.domain.Team;
 import com.ullim.ssomserver.domain.team.domain.repository.TeamRepository;
-import com.ullim.ssomserver.domain.user.domain.Repository.UserRepository;
 import com.ullim.ssomserver.domain.user.domain.User;
 import com.ullim.ssomserver.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +26,7 @@ public class CreateGoalService {
         Team team = teamRepository.findTeamById(request.getTeamId());
         Goal goal = Goal.builder()
                 .content(request.getContent())
-                .completedAt(LocalDateTime.now())
+                .completedAt(request.getCompletedAt())
                 .team(team)
                 .user(user)
                 .build();
