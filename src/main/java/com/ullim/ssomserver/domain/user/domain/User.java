@@ -1,5 +1,6 @@
 package com.ullim.ssomserver.domain.user.domain;
 
+import com.ullim.ssomserver.domain.team.domain.Team;
 import com.ullim.ssomserver.global.entity.BaseTimeEntity;
 import com.ullim.ssomserver.global.type.Status;
 import lombok.AccessLevel;
@@ -7,14 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

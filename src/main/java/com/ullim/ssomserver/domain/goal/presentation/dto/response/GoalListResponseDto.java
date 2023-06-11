@@ -9,7 +9,10 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class GoalListResponseDto {
+<<<<<<< HEAD
 
     private TeamDetailResponseDto team;
+=======
+>>>>>>> c4c2e60 (ADD: Percentage in goal response dto and only fetch my goal not team)
     private List<GoalResponseDto> GoalList;
 }

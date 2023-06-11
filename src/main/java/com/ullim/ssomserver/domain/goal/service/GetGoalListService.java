@@ -25,6 +25,7 @@ public class GetGoalListService {
         return new GoalListResponseDto(
                 null,
                 goalRepository.findGoalByUser(user).stream()
+                        .filter(g -> false)
                         .map(GoalResponseDto::of)
                         .collect(Collectors.toList())
         );
