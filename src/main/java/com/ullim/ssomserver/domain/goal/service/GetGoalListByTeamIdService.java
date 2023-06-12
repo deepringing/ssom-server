@@ -6,6 +6,7 @@ import com.ullim.ssomserver.domain.goal.presentation.dto.response.GoalResponseDt
 import com.ullim.ssomserver.domain.team.domain.Team;
 import com.ullim.ssomserver.domain.team.domain.repository.TeamRepository;
 import com.ullim.ssomserver.domain.team.presentation.dto.response.TeamDetailResponseDto;
+import com.ullim.ssomserver.domain.todo.domain.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class GetGoalListByTeamIdService {
 
     private final TeamRepository teamRepository;
     private final GoalRepository goalRepository;
+    private final TodoRepository todoRepository;
 
     @Transactional
     public GoalListResponseDto execute(Long teamId) {
@@ -26,7 +28,7 @@ public class GetGoalListByTeamIdService {
         return new GoalListResponseDto(
                 TeamDetailResponseDto.of(team),
                 goalRepository.findGoalByTeam(team).stream()
-                        .map(GoalResponseDto::of)
+                        .map((g) -> GoalResponseDto.of(g, todoRepository))
                         .collect(Collectors.toList())
         );
     }

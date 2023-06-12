@@ -1,5 +1,6 @@
 package com.ullim.ssomserver.domain.goal.domain;
 
+import com.ullim.ssomserver.domain.goal.domain.type.GoalType;
 import com.ullim.ssomserver.domain.team.domain.Team;
 import com.ullim.ssomserver.domain.todo.domain.Todo;
 import com.ullim.ssomserver.domain.user.domain.User;
@@ -58,12 +59,16 @@ public class Goal extends BaseTimeEntity {
     @OneToMany(mappedBy = "goal")
     private List<Todo> todoList = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    private GoalType type;
+
     @Builder
-    public Goal(String content, LocalDate completedAt, User user, Team team) {
+    public Goal(String content, LocalDate completedAt, User user, Team team, GoalType type) {
         this.content = content;
         this.completedAt = completedAt;
         this.user = user;
         this.team = team;
         this.status = Status.STARTED;
+        this.type = type;
     }
 }
